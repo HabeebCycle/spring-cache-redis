@@ -6,7 +6,6 @@ import com.habeebcycle.springcacheredis.service.ProductService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,12 +30,11 @@ public class ProductController {
 
     @GetMapping("/products/{productId}")
     @Cacheable(value = "product", key = "#productId", sync = true)
-    public ResponseEntity<Product> getProduct(@PathVariable String productId) throws ProductNotFoundException {
+    public Product getProduct(@PathVariable String productId) throws ProductNotFoundException {
         System.out.println("getProduct");
-        Product product = productService.findProduct(productId)
+        return productService.findProduct(productId)
                 .orElseThrow(() ->
                         new ProductNotFoundException("No product found with the following Id :: " + productId));
-        return ResponseEntity.ok(product);
     }
 
     @GetMapping("/products/range")
@@ -48,18 +46,16 @@ public class ProductController {
 
     @PostMapping("/products")
     @CachePut(value = "product")
-    public ResponseEntity<Product> postProduct(@Valid @RequestBody Product product){
+    public Product postProduct(@Valid @RequestBody Product product){
         System.out.println("postProduct");
-        Product savedProduct = productService.saveProduct(product);
-        return ResponseEntity.ok(savedProduct);
+        return productService.saveProduct(product);
     }
 
     @PutMapping("/products")
     @CachePut(value = "product", key = "#product.id")
-    public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product){
+    public Product updateProduct(@Valid @RequestBody Product product){
         System.out.println("updateProduct");
-        Product updatedProduct = productService.saveProduct(product);
-        return ResponseEntity.ok(updatedProduct);
+        return productService.saveProduct(product);
     }
 
     @DeleteMapping("/products/{productId}")
