@@ -22,7 +22,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    //@Cacheable(value = "product", sync = true)
+    @Cacheable(value = "product", sync = true)
     public List<Product> getAllProducts(){
         System.out.println("getAllProducts");
         return productService.findAllProducts();

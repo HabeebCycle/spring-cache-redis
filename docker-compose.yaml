@@ -8,7 +8,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/spring_mongo
-      - SPRING_CACHE_REDIS_TIME-TO-LIVE=60s
+      - SPRING_CACHE_REDIS_TIME-TO-LIVE=30s
     ports:
       - "8080:8080"
     depends_on:
