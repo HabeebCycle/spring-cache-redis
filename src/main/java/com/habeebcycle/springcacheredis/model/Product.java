@@ -5,10 +5,11 @@ import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Document(collection = "product")
-public class Product {
+public class Product implements Serializable {
 
     @Id
     private String id;

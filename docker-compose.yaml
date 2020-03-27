@@ -7,8 +7,19 @@ services:
     container_name: spring-cache-redis-app
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8080:8080"
     depends_on:
+      - mongodb
       - redis
+
+  # $ mongo
+  mongodb:
+    image: mongo:3.6.9
+    container_name: mongo-database
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles
 
   # $ redis
   redis:
@@ -16,3 +27,4 @@ services:
     container_name: redis-cache
     ports:
       - "6379:6379"
+    command: redis-cli -h redis
