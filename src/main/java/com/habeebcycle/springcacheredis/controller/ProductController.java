@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    @CachePut(value = "product")
+    @CachePut(value = "product", key = "#product.id")
     public Product postProduct(@Valid @RequestBody Product product){
         System.out.println("postProduct");
         return productService.saveProduct(product);
