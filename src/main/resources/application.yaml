@@ -1,0 +1,34 @@
+spring:
+  data:
+    mongodb:
+      # MONGODB - ATLAS (MongoProperties)
+      uri: mongodb+srv://habeebcycle:secret101@cluster0-lzygs.mongodb.net/spring_mongo?retryWrites=true&w=majority
+      database: spring_mongo
+  cache:
+    type: simple
+
+
+logging:
+  level:
+    root: INFO
+    com.habeebcycle: DEBUG
+
+server:
+  port: 8080
+
+---
+
+spring:
+  profiles: docker
+  data:
+    mongodb:
+      host: mongodb
+  cache:
+    type: redis
+    redis:
+      cache-null-values: false
+      time-to-live: 10s
+      use-key-prefix: false
+  redis:
+    host: redis
+    port: 6379

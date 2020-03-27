@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+
+  spring-cache-redis:
+    image: habeebcycle/spring-cache-redis:v1
+    container_name: spring-cache-redis-app
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - redis
+
+  # $ redis
+  redis:
+    image: redis:alpine
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
