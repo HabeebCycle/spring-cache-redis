@@ -22,12 +22,12 @@ spring:
   profiles: docker
   data:
     mongodb:
-      host: mongodb
+      uri: mongodb://mongodb:27017/spring_mongo
   cache:
     type: redis
     redis:
       cache-null-values: false
-      time-to-live: 10s
+      time-to-live: 300s
       use-key-prefix: false
   redis:
     host: redis
